@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://api.ssps.cajthaml.eu/file/64d9f18f79dad891e8a07c73">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Alg trainer</title>
+    <style>
+        body {
+            justify-content: center;
+            align-items: center;
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 1px;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        #scramble {
+            font-size: 2rem;
+            margin-bottom: 0;
+            text-align: center;
+        }
+        #timer {
+            font-size: 5rem;
+            margin-top: 10px;
+            font-family: "Azeret Mono", monospace;
+        }
+        #delete-last-solve-button {
+            font-size: 2rem;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #delete-last-solve-button:hover {
+            color: #ff7f7f;
+        }
+        #delete-last-solve-button.disabled {
+            visibility: collapse;
+        }
+    </style>
+</head>
+<body id="body">
+    <script src="https://kit.fontawesome.com/a40125ec5d.js" crossorigin="anonymous"></script>
+    <aside>
+
+    </aside>
+    <main>
+        <section>
+            <p id="scramble">Loading scramble...</p>
+            <p id="timer"">0.00</p>
+            <span id="delete-last-solve-button" class="disabled"><i class="fa-sharp fa-solid fa-xmark"></i></span>
+        </section>
+        <a href="oll_selection.html">Select cases</a>
+    </main>
+</body>
+</html>
+<script type="module" src="scripts/timer.js"></script>
