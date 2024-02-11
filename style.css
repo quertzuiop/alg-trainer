@@ -1,7 +1,8 @@
 body {
     display: flex;
     flex-direction: column;
-    background-color: #18171d;
+    /*background-color: #18171d;*/
+    background-color: black;
     color: white;
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
