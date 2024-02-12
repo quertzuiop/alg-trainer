@@ -8,7 +8,7 @@ const canvas = document.getElementById('animated-background');
       return {
         x,
         y,
-        size: Math.random() * 40 + 1,
+        size: Math.random() * 50 + 1,
         heading: Math.random() * Math.PI * 2,
         //speed: Math.random(),
         speed: 0.2,
@@ -65,7 +65,7 @@ const canvas = document.getElementById('animated-background');
       });
     });
 
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 30; i++) {
       //particles.push(createParticle(Math.random() * canvas.width, Math.random() * canvas.height));
       particles.push(createParticle(window.innerWidth / 2 + Math.random()*300 - 150, window.innerHeight / 2 + Math.random()*300 - 150));
     }
