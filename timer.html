@@ -25,7 +25,6 @@
         }
         main {
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: space-between;
             height: 1px;
@@ -43,6 +42,50 @@
             align-items: center;
             justify-content: center;
             height: 100%;
+            width: 100%;
+        }
+        aside {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: absolute;
+            left: 20px;
+
+        }
+        h2 {
+            margin: 15px;
+        }
+        #current-cases-container {
+            display: none;
+            gap: 10px;
+            transition: all 0.3s;
+            max-height: 90vh;
+        }
+        #current-cases-container::-webkit-scrollbar { 
+            display: none;
+        }
+        #current-cases-container.expanded {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: start;
+            overflow: scroll;
+            overflow-x: hidden;
+            gap: 15px;
+            background-color: #1c1b21;
+            padding: 15px;
+            border-radius: 20px;
+        }
+        #current-cases-container div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+        #current-cases-container div p{
+            width: 100%;
+            text-align: center;
+            font-size: 1.2rem;
         }
         #scramble {
             font-size: 2rem;
@@ -65,23 +108,44 @@
         #delete-last-solve-button.disabled {
             visibility: collapse;
         }
+        #expand-button {
+            transform: scale(1, 1);
+        }
+        #expand-button.expanded {
+            transform: scale(-1, 1);
+        }
+        img {
+            width: 80px;
+        }
+        @media (max-width: 800px) {
+            aside {
+                bottom: 0;
+                left: 50%;
+                transform: translate(-50%, 50%);
+            }
+        }
     </style>
 </head>
 <body id="body">
     <script src="https://kit.fontawesome.com/a40125ec5d.js" crossorigin="anonymous"></script>
-    <aside>
-
-    </aside>
     <canvas id="animated-background"></canvas>
     <main>
+        <aside>
+            <section id="current-cases-container" class="expanded">
+            </section>
+            <i class="fa-solid fa-chevron-right expanded" id="expand-button"></i>
+        </aside>
         <section>
-            <p id="scramble">Loading scramble...</p>
-            <p id="timer"">0.00</p>
-            <span id="delete-last-solve-button" class="disabled"><i class="fa-sharp fa-solid fa-xmark"></i></span>
+            <section>
+                <p id="scramble">Loading scramble...</p>
+                <p id="timer">0.00</p>
+                <span id="delete-last-solve-button" class="disabled"><i class="fa-sharp fa-solid fa-xmark"></i></span>
+            </section>
+            <a href="oll_selection.html">Select cases</a>
         </section>
-        <a href="oll_selection.html">Select cases</a>
     </main>
 </body>
 </html>
 <script type="module" src="scripts/timer.js"></script>
+<script type="module" src="scripts/current-cases.js"></script>
 <script src="scripts/bg_animation.js"></script>

@@ -1,33 +1,32 @@
-var timer = document.getElementById('timer');
-var scramble = document.getElementById('scramble');
-var scrambleList = [];
-var time = 0;
-var running = 0;
-var startTime;
-var selectedCase;
-var justStopped = false;
+let timer = document.getElementById('timer');
+let scramble = document.getElementById('scramble');
+let solveList = JSON.parse(localStorage.getItem('solveList')) || [];
+let time = 0;
+let running = 0;
+let startTime;
+let selectedCase;
+let justStopped = false;
 import oll_cases from '../scripts/oll_cases.json' assert { type: 'json' };
 //localStorage.clear();
 const selectedCases = JSON.parse(localStorage.getItem('selectedCases')) || [];
-console.log(selectedCases)
 newScramble();
 
 function choose(choices) {
-    var index = Math.floor(Math.random() * choices.length);
+    let index = Math.floor(Math.random() * choices.length);
     return choices[index];
 }
 function msToTime(duration) {
-    var milliseconds = parseInt((duration%1000)/10)
-    var seconds = parseInt((duration/1000)%60)
-    var minutes = parseInt((duration/(1000*60))%60)
+    let milliseconds = parseInt((duration%1000)/10)
+    let seconds = parseInt((duration/1000)%60)
+    let minutes = parseInt((duration/(1000*60))%60)
     seconds = (seconds < 10) && minutes != 0 ? "0" + seconds : seconds
     milliseconds = (milliseconds < 10) ? "0" + milliseconds : milliseconds
     return (minutes>0 ? (minutes + ":") : " ")  + seconds + "." + milliseconds
 }
 function update() {
     if (running == 1) {
-        var currentTime = new Date().getTime();
-        var timePassed = currentTime - startTime;
+        let currentTime = new Date().getTime();
+        let timePassed = currentTime - startTime;
         time = timePassed;
         timer.innerHTML = msToTime(time);
     }
@@ -36,7 +35,6 @@ function update() {
 function newScramble() {
     selectedCase = choose(selectedCases);
     scramble.innerHTML = oll_cases[selectedCase]["scrambles"][Math.floor(Math.random() * oll_cases[selectedCase]["scrambles"].length)];
-    scrambleList.push(scramble.innerHTML);
 }
 function reset() {
     time = 0;
@@ -59,6 +57,8 @@ document.addEventListener("keydown", function(event) {
     if (event.key == " ") {
         if (running == 1) {
             running = 0;
+            solveList.push([scramble.innerHTML, time, selectedCase]);
+            localStorage.setItem('solveList', JSON.stringify(solveList));
             newScramble();
             document.getElementById("delete-last-solve-button").classList.remove('disabled');
             justStopped = true;
@@ -67,6 +67,6 @@ document.addEventListener("keydown", function(event) {
 });
 document.getElementById("delete-last-solve-button").addEventListener("click", function() {
     reset();
-    scrambleList.pop();
+    solveList.pop();
     document.getElementById("delete-last-solve-button").classList.add('disabled');
 });

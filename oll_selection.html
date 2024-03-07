@@ -11,22 +11,29 @@
     <title>Alg trainer</title>
     <style>
         body {
-            padding: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
-        #cases {
+        #groups {
+            display: flex;
+            flex-direction: column;
+        }
+        .cases {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
         .case {
             display: flex;
             flex-direction: column;
-            background-color: #26252e;
+            background-color: #23222a;
             border-radius: 20px;
             cursor: pointer;
-            padding: 10px;
+            padding: 15px;
             gap: 10px;
-            height: 100px;
+            /*height: 100px;*/
         }
         .case.selected {
             background-color: #3c3662;
@@ -34,12 +41,38 @@
         .case p {
             color: #999;
         }
+        img {
+            width: 70px;
+        }
+        .case > div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        button {
+            position: sticky;
+            bottom: 40px;
+            left: calc(100% - 20px);
+            margin: 20px;
+            background-color: #5542cb;
+        }
+        h2 {
+            cursor: pointer;
+        }
+        h2:hover {
+            color: lightgray;
+        }
+        h2:active {
+            color: white;
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body>
     <h1>Select cases</h1>
-    <div id="cases">
-    </div>
+    <div id="groups"></div>
+    <button id="done-button"><p>Done</p></button>
 </body>
 </html>
 <script src="scripts/oll_selection.js" type="module"></script>

@@ -1,3 +1,8 @@
+* {
+    box-sizing: border-box;
+    color: white;
+    transition: color 0.2s, transform 0.2s;
+}
 body {
     display: flex;
     flex-direction: column;
@@ -8,14 +13,16 @@ body {
     min-height: 100vh;
 }
 h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin: 20px 0px;
     padding: 0;
 }
 h2 {
     font-size: 2rem;
-    margin: 0;
+    margin-top: 30px;
+    margin-bottom: 10px;
     padding: 0;
+    width: fit-content;
 }
 h3 {
     font-size: 1.3rem;
@@ -24,8 +31,20 @@ h3 {
 }
 a {
     text-decoration: none;
-    color: blue;
+    color: rgb(100, 100, 255);
 }
 a:visited {
-    color: blue;
+    color: rgb(100, 100, 255);
+}
+button {
+    padding: 10px 20px;
+    font-size: 20px;
+    width: min-content;
+    background-color: #5542cb;
+    border-radius: 10px;
+    border: none;
+}
+button:hover {
+    background-color: #5858e4;
+    cursor: pointer;
 }
