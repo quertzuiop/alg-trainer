@@ -14,7 +14,7 @@ function createParticle(x, y) {
         size: Math.random() * 50 + 1,
         heading: Math.random() * Math.PI * 2,
         //speed: Math.random(),
-        speed: 0.2,
+        speed: 1,
         color: ['rgba(255, 0, 255, 0.5)', 'rgba(0, 255, 255, 0.5)'][Math.floor(Math.random() * 2)],
     };
 }
@@ -49,22 +49,45 @@ function updateParticles() {
         const angle = mod(a + Math.PI, Math.PI*2) - Math.PI;
         //const angle = Math.atan2(window.innerHeight / 2 - particle.y, window.innerWidth / 2 - particle.x) - particle.heading;
         //console.log(mod(-10, 360), angle * 57.2958, particle.heading * 57.2958);
-        particle.heading += angle * 0.00001 * Math.sqrt(Math.pow(window.innerWidth / 2 - particle.x /*+ aside.offsetWidth*/, 2) + Math.pow(window.innerHeight / 2 - particle.y, 2));
+        particle.heading += angle * 0.0001 * Math.sqrt(Math.pow(window.innerWidth / 2 - particle.x /*+ aside.offsetWidth*/, 2) + Math.pow(window.innerHeight / 2 - particle.y, 2));
         particle.heading += Math.random() * 0.2 - 0.1;
-        if (particle.x > canvas.width || particle.x < 0 ||
-                particle.y > canvas.height || particle.y < 0) {
+        if (particle.x > canvas.width || particle.x < 0 || particle.y > canvas.height || particle.y < 0) {
             particle.x = canvas.width / 2;
             particle.y = canvas.height / 2;
         }
     });
-    //setTimeout(1000)
 }
+/*
+function updateParticles() {
+    let index = 0;
+    function updateSingleParticle() {
+        if (index < particles.length) {
+            const particle = particles[index];
+            particle.x += Math.cos(particle.heading) * particle.speed;
+            particle.y += Math.sin(particle.heading) * particle.speed;
+            const a = Math.atan2(window.innerHeight / 2 - particle.y, window.innerWidth / 2 - particle.x) - particle.heading;
+            const angle = mod(a + Math.PI, Math.PI * 2) - Math.PI;
+            particle.heading += angle * 0.0001 * Math.sqrt(Math.pow(window.innerWidth / 2 - particle.x, 2) + Math.pow(window.innerHeight / 2 - particle.y, 2));
+            particle.heading += Math.random() * 0.2 - 0.1;
 
+            if (particle.x > canvas.width || particle.x < 0 || particle.y > canvas.height || particle.y < 0) {
+                particle.x = canvas.width / 2;
+                particle.y = canvas.height / 2;
+            }
+            index++;
+            setTimeout(updateSingleParticle, 1000);
+        }
+    }
+
+    // Start the update process
+    updateSingleParticle();
+}
+*/
 function animate() {
     createParticle(window.innerWidth / 2, window.innerHeight / 2);
     drawParticles();
     updateParticles();
-    requestAnimationFrame(animate);
+    setTimeout(animate, 100);
 }
 
 window.addEventListener('resize', () => {

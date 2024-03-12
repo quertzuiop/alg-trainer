@@ -1,14 +1,25 @@
+:root {
+    --bg: black;
+    --bg-secondary: #23222a;
+    --bg-accent: #3c3662;    
+    --bg-slight-accent: #211b47;
+    --text: white;
+    --text-secondary: lightgray;
+    --link: rgb(100, 100, 255);
+    --primary: #5542cb;
+
+    --border-radius: 20px;
+    --border-radius-small: 10px;
+}
 * {
     box-sizing: border-box;
-    color: white;
-    transition: color 0.2s, transform 0.2s;
+    color: var(--text);
+    transition: transform 0.2s, color 0.5s;
 }
 body {
     display: flex;
     flex-direction: column;
-    /*background-color: #18171d;*/
-    background-color: black;
-    color: white;
+    background-color: var(--bg);
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
 }
@@ -31,20 +42,23 @@ h3 {
 }
 a {
     text-decoration: none;
-    color: rgb(100, 100, 255);
+    color: var(--link);
 }
 a:visited {
-    color: rgb(100, 100, 255);
+    color: var(--link);
 }
 button {
     padding: 10px 20px;
     font-size: 20px;
     width: min-content;
-    background-color: #5542cb;
-    border-radius: 10px;
+    background-color: var(--primary);
+    border-radius: var(--border-radius-small);
     border: none;
 }
 button:hover {
     background-color: #5858e4;
     cursor: pointer;
+}
+button:active {
+    transform: scale(0.95);
 }

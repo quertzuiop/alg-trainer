@@ -10,6 +10,23 @@ if (container != null) {
             caseContainer.innerHTML += "<img src='oll_img/"+selectedCases[caseIndex]+".svg' alt=\"nefunguje\">";
             let avg = average(selectedCases[i]);
             caseContainer.innerHTML += "<p>"+(avg!=0 ? msToTime(avg) : "-")+"</p>";
+
+            caseContainer.addEventListener('click', function () {
+                let caseSolves = document.getElementById("case-solves");
+                caseSolves.querySelector("h2").innerHTML = cases[selectedCases[caseIndex]]["name"];
+                let solvesContainer = document.getElementById("case-solvelist");
+                for (let i = 0; i < solveList.length; i++) {
+                    if (solveList[i][2] == selectedCases[caseIndex]) {
+                        let time = document.createElement('p');
+                        time.innerHTML = msToTime(solveList[i][1]);
+                        solvesContainer.appendChild(time);
+                        let auf = document.createElement('p');
+                        auf.innerHTML = "U2";
+                        solvesContainer.appendChild(auf);
+                    }
+                }
+                caseSolves.classList.remove('hidden');
+            });
             container.insertBefore(caseContainer, container.firstChild);
         })(i);
     }
@@ -38,3 +55,6 @@ function msToTime(duration) {
     milliseconds = (milliseconds < 10) ? "0" + milliseconds : milliseconds
     return (minutes>0 ? (minutes + ":") : " ")  + seconds + "." + milliseconds
 }
+document.getElementById("close-case-solves-button").addEventListener("click", function() {
+    document.getElementById("case-solves").classList.add('hidden');
+});

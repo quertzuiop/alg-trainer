@@ -44,6 +44,7 @@ function reset() {
 document.addEventListener("keyup", function(event) {
     if (event.key == " "  && running == 0) {
         if (!justStopped) {
+            timer.classList.remove("ready");
             running = 1;
             startTime = new Date().getTime();
             update();
@@ -62,6 +63,8 @@ document.addEventListener("keydown", function(event) {
             newScramble();
             document.getElementById("delete-last-solve-button").classList.remove('disabled');
             justStopped = true;
+        } else {
+            timer.classList.add("ready")
         }
     }
 });
