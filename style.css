@@ -1,12 +1,21 @@
 :root {
-    --bg: black;
-    --bg-secondary: #23222a;
-    --bg-accent: #3c3662;    
-    --bg-slight-accent: #211b47;
-    --text: white;
-    --text-secondary: lightgray;
     --link: rgb(100, 100, 255);
-    --primary: #5542cb;
+    --text: #ebe4f6;
+    --text-secondary: lightgray;
+
+    --background: #0f071d;
+    --background-5: color-mix(in srgb, var(--background), var(--text) 5%);
+    --background-10: color-mix(in srgb, var(--background), var(--text) 10%);
+    --background-15: color-mix(in srgb, var(--background), var(--text) 15%);
+    --background-20: color-mix(in srgb, var(--background), var(--text) 20%);
+
+    --primary: #ad8ced;
+    --background-accent-5: color-mix(in srgb, var(--background), var(--accent) 5%);
+    --background-accent-10: color-mix(in srgb, var(--background), var(--accent) 10%);
+    --background-accent-15: color-mix(in srgb, var(--background), var(--accent) 15%);
+
+    --secondary: #410ea0;
+    --accent: #681ff9;
 
     --border-radius: 20px;
     --border-radius-small: 10px;
@@ -15,11 +24,12 @@
     box-sizing: border-box;
     color: var(--text);
     transition: transform 0.2s, color 0.5s;
+    margin: 0;
 }
 body {
     display: flex;
     flex-direction: column;
-    background-color: var(--bg);
+    background-color: var(--background);
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
 }
@@ -27,6 +37,7 @@ h1 {
     font-size: 3rem;
     margin: 20px 0px;
     padding: 0;
+    color: var(--primary);
 }
 h2 {
     font-size: 2rem;
@@ -56,9 +67,22 @@ button {
     border: none;
 }
 button:hover {
-    background-color: #5858e4;
+    background-color: var(--accent);
     cursor: pointer;
 }
 button:active {
     transform: scale(0.95);
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--background-10);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--background-15);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--background-20);
 }

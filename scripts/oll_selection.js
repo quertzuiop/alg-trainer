@@ -1,6 +1,6 @@
 let container = document.getElementById('groups');
-import cases from '../scripts/oll_cases.json' assert { type: 'json' };
-import groups from "../scripts/oll_groups.json" assert { type: "json" };
+import cases from '../scripts/oll_cases.json' with { type: 'json' };
+import groups from "../scripts/oll_groups.json" with { type: "json" };
 let selectedCases = JSON.parse(localStorage.getItem('selectedCases')) || [];
 //localStorage.clear();
 if (container != null) {
@@ -35,6 +35,7 @@ if (container != null) {
                         caseContainer.classList.add('selected');
                     }
                     caseContainer.innerHTML = "<h3>" + cases[caseIndex]["name"] + "</h3>";
+                    caseContainer.innerHTML += "<div class='transition-mask'></div>"
                     let caseInfo = caseContainer.appendChild(document.createElement('div'));
                     caseInfo.innerHTML += "<img src='oll_img/"+i+".svg' alt=\"nefunguje\">";
                     caseInfo.innerHTML += "<p>" + cases[caseIndex]["a"] + "</p>";
@@ -45,6 +46,7 @@ if (container != null) {
                             this.classList.remove('selected');
                             selectedCases.splice(selectedCases.indexOf(caseIndex), 1);
                             localStorage.setItem('selectedCases', JSON.stringify(selectedCases));
+
                         } else {
                             this.classList.add('selected');
                             selectedCases.push(caseIndex);

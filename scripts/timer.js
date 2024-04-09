@@ -6,7 +6,7 @@ let running = 0;
 let startTime;
 let selectedCase;
 let justStopped = false;
-import oll_cases from '../scripts/oll_cases.json' assert { type: 'json' };
+import oll_cases from '../scripts/oll_cases.json' with { type: 'json' };
 //localStorage.clear();
 const selectedCases = JSON.parse(localStorage.getItem('selectedCases')) || [];
 newScramble();
@@ -49,6 +49,7 @@ document.addEventListener("keyup", function(event) {
             startTime = new Date().getTime();
             update();
             document.getElementById("delete-last-solve-button").classList.add('disabled');
+            timer.classList.add("running")
         } else {
             justStopped = false;
         }
@@ -63,6 +64,7 @@ document.addEventListener("keydown", function(event) {
             newScramble();
             document.getElementById("delete-last-solve-button").classList.remove('disabled');
             justStopped = true;
+            timer.classList.remove("running")
         } else {
             timer.classList.add("ready")
         }
