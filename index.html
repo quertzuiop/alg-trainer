@@ -3,14 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
     <title>Alg trainer</title>
     <style>
+        body {
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
 
+        #title {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--text);
+            max-width: 700px;
+            text-align: center;
+        }
+        .algset-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--primary15);
+            border-radius: var(--border-radius);
+        }
+        .algset-selection>section {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        .algset {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            padding: 10px;
+        }
+        .algset img {
+            width: 150px;
+            cursor: pointer;
+        }
+        .algset h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        canvas {
+            width: 500px;
+            height: 500px;
+        }
     </style>
-    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@<version>/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@<version>/examples/jsm/"
+          }
+        }
+      </script>
 </head>
 <body>
+    <h1 id="title">The ultimate tool for algorithm training</h1>    
+    <section class="algset-selection">
+        <h2>Start Training!</h2>
+        <section>
+            <div class="algset">
+                <h3>OLL</h3>
+                <img src="img/oll.svg" alt="">
+            </div>
+            <div class="algset">
+                <h3>PLL</h3>
+                <img src="img/pll.svg" alt="">
+            </div>
+        </section>
+    </section>
     <a href="timer.html"></a>
-    
+    <script type="module" src="scripts/cubes.js"></script>
 </body>
 </html>

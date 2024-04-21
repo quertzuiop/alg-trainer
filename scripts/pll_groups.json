@@ -1,0 +1,7 @@
+{
+"Edges only": ["Ua", "Ub", "H", "Z"],
+"Corners only": ["Aa", "Ab", "E"],
+"Adjacent corner swap": ["T", "F", "Ja", "Jb", "Ra", "Rb"],
+"Diagonal corner swap": ["Y", "V", "Na", "Nb"],
+"G perms": ["Ga", "Gb", "Gc", "Gd"]
+}

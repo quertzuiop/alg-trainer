@@ -1,33 +1,41 @@
 let container = document.getElementById("current-cases-container");
 let timer = document.getElementById("timer")
-let selectedCases = JSON.parse(localStorage.getItem("selectedCases")) || [];
-import cases from './oll_cases.json' with { type: "json" };
-let solveList = JSON.parse(localStorage.getItem("solveList")) || [];
+let selectedCases = JSON.parse(localStorage.getItem("selectedCases")) || {"oll": [], "pll": []};
+import cases from './oll_cases.json' assert { type: "json" };
+/*import Chart from 'chart.js/auto';*/
+let algset = JSON.parse(localStorage.getItem("algset")) || "pll";
+let solveList = JSON.parse(localStorage.getItem("solveLists")) ||{"oll": [], "pll": []};
+solveList = solveList[algset];
 
 function updateCases() {
-    solveList = JSON.parse(localStorage.getItem("solveList")) || [];
+    console.log("updating cases")
+    solveList = JSON.parse(localStorage.getItem("solveLists")) ||{"oll": [], "pll": []};
+    solveList = solveList[algset];
     container.innerHTML = ""
     if (container != null) {
-        for (let i = 0; i < selectedCases.length; i++) {
+        if (selectedCases[algset].length == 0) {
+            container.innerHTML = "<div></div><p>No cases selected</p><div></div>" //divs for padding
+        }
+        for (let i = 0; i < selectedCases[algset].length; i++) {
             (function (caseIndex) {
                 let caseContainer = document.createElement("div");
-                caseContainer.innerHTML += "<img src='oll_img/"+selectedCases[caseIndex]+".svg' alt=\"nefunguje\">";
+                caseContainer.innerHTML += "<img src='"+algset+"_img/"+selectedCases[algset][caseIndex]+".svg' alt="+selectedCases[algset][caseIndex]+">";
 
-                let avg = average(selectedCases[caseIndex], true);
+                let avg = average(selectedCases[algset][caseIndex], true);
                 caseContainer.innerHTML += "<p>"+(avg!=0 ? avg : "-")+"</p>";
             
                 caseContainer.addEventListener("click", function () {
                     let caseSolves = document.getElementById("case-solves");
-
-                    document.getElementById("case-img").setAttribute("src", "oll_img/"+selectedCases[caseIndex]+".svg")
-                    caseSolves.querySelector("div>p").innerHTML = average(selectedCases[caseIndex], true)
-                    caseSolves.querySelector("h2").innerHTML = cases[selectedCases[caseIndex]]["name"];
+                    document.getElementById("case-img").setAttribute("src", algset+"_img/"+selectedCases[algset][caseIndex]+".svg")
+                    caseSolves.querySelector("div>p").innerHTML = average(selectedCases[algset][caseIndex], true)
+                    if (algset == "oll") caseSolves.querySelector("h2").innerHTML = cases[selectedCases[algset][caseIndex]]["name"];
+                    else if (algset == "pll") caseSolves.querySelector("h2").innerHTML = selectedCases[algset][caseIndex] + " Perm";
                     let solvesContainer = document.getElementById("case-solvelist");
                     solvesContainer.innerHTML = "<p class='grid-header'>Time</p><p class='grid-header'>AUF</p>";
 
                     let numSolves = 0;
                     for (let i = 0; i < solveList.length; i++) {
-                        if (solveList[i][2] == selectedCases[caseIndex]) {
+                        if (solveList[i][2] == selectedCases[algset][caseIndex]) {
                             let time = document.createElement("p");
                             time.innerHTML = msToTime(solveList[i][1]);
                             solvesContainer.appendChild(time);
@@ -46,7 +54,9 @@ function updateCases() {
                     caseSolves.classList.remove('hidden');
                 });
                 container.insertBefore(caseContainer, container.firstChild);
-            })(i);
+            })(
+                i
+            );
         }
         let expandButton = document.getElementById("expand-button");
         expandButton.addEventListener('click', function () {
@@ -102,7 +112,7 @@ onClassChange(timer, (node) => {
     };
 });
 onClassChange(document.getElementById("delete-last-solve-button"), (node) => {
-    if (!node.classList.contains("disabled")) {
+    if (node.classList.contains("disabled")) {
         updateCases();
     };
 });

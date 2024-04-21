@@ -1,7 +1,7 @@
 let container = document.getElementById('groups');
-import cases from '../scripts/oll_cases.json' assert { type: 'json' };
-import groups from "../scripts/oll_groups.json" assert { type: "json" };
-let selectedCases = JSON.parse(localStorage.getItem('selectedCases')) || [];
+import cases from '../scripts/pll_cases.json' assert { type: 'json' };
+import groups from "../scripts/pll_groups.json" assert { type: "json" };
+let selectedCases = JSON.parse(localStorage.getItem('selectedCases')) || {"oll": [], "pll": []};
 //localStorage.clear();
 if (container != null) {
     for (let group in groups) {
@@ -14,41 +14,41 @@ if (container != null) {
             let cases = Array.from(groupCasesContainer.querySelectorAll('.case'));
             if (cases.every(element => element.classList.contains('selected'))) {
                 cases.forEach(element => element.classList.remove('selected'));
-                selectedCases = selectedCases.filter(element => !groups[group].includes(element));
+                selectedCases["pll"] = selectedCases["pll"].filter(element => !groups[group].includes(element));
             } else {
                 cases.forEach(element => {
                     if (!element.classList.contains('selected')) {
                         element.classList.add('selected');
-                        selectedCases.push(groups[group][cases.indexOf(element)]);
+                        selectedCases["pll"].push(groups[group][cases.indexOf(element)]);
                     }
                 }
                 );
             }
             localStorage.setItem('selectedCases', JSON.stringify(selectedCases));
         });
-        for (let i = 1; i < Object.keys(cases).length + 1; i++) {
-            if (groups[group].includes(i)) {
+        for (let i = 0; i < Object.keys(cases).length; i++) {
+            if (groups[group].includes(Object.keys(cases)[i])) {
                 (function (caseIndex) {
                     let caseContainer = document.createElement('div');
                     caseContainer.classList.add('case');
-                    if (selectedCases.includes(caseIndex)) {
+                    if (selectedCases["pll"].includes(Object.keys(cases)[i])) {
                         caseContainer.classList.add('selected');
                     }
-                    caseContainer.innerHTML = "<h3>" + cases[caseIndex]["name"] + "</h3>";
+                    caseContainer.innerHTML = "<h3>" + Object.keys(cases)[i] + "</h3>";
                     let caseInfo = caseContainer.appendChild(document.createElement('div'));
-                    caseInfo.innerHTML += "<img src='oll_img/"+i+".svg' alt=\"nefunguje\">";
-                    caseInfo.innerHTML += "<p>" + cases[caseIndex]["a"] + "</p>";
+                    caseInfo.innerHTML += "<img src='pll_img/"+Object.keys(cases)[i]+".svg' alt=\"nefunguje\">";
+                    caseInfo.innerHTML += "<p>" + cases[Object.keys(cases)[i]][0] + "</p>";
                     groupCasesContainer.appendChild(caseContainer);
 
                     caseContainer.addEventListener('click', function () {
                         if (this.classList.contains('selected')) {
                             this.classList.remove('selected');
-                            selectedCases.splice(selectedCases.indexOf(caseIndex), 1);
+                            selectedCases["pll"].splice(selectedCases["pll"].indexOf(Object.keys(cases)[i]), 1);
                             localStorage.setItem('selectedCases', JSON.stringify(selectedCases));
 
                         } else {
                             this.classList.add('selected');
-                            selectedCases.push(caseIndex);
+                            selectedCases["pll"].push(Object.keys(cases)[caseIndex]);
                             localStorage.setItem('selectedCases', JSON.stringify(selectedCases));
                         }
                     });

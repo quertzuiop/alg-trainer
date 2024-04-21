@@ -3,12 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://api.ssps.cajthaml.eu/file/64d9f18f79dad891e8a07c73">
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <title>Alg trainer</title>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/",
+                "chart": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.js"
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
     <style>
         body {
             justify-content: center;
@@ -73,12 +83,10 @@
             gap: 10px;
             max-height: 90vh;
             overflow: hidden;
-            
         }
         #current-cases-container * {
             width: 0;
             gap: 0;
-            transition: all 0.2s ease-in-out;
         }
         #current-cases-container::-webkit-scrollbar { 
             display: none;
@@ -91,7 +99,7 @@
             overflow: scroll;
             overflow-x: hidden;
             gap: 15px;
-            background-color: var(--background-10);
+            background-color: var(--primary10);
             padding: 15px;
             border-radius: var(--border-radius);
             width: auto;
@@ -102,20 +110,23 @@
         #current-cases-container.expanded img {
             width: 80px;
         }
+        #current-cases-container.expanded p {
+            width: auto;
+        }
         #current-cases-container.expanded>div {
             gap: 15px;
         }
-        #current-cases-container div {
+        #current-cases-container>div {
             display: flex;
             align-items: center;
             width: 100%;
         }
-        #current-cases-container div p{
+        #current-cases-container>div>p{
             text-align: center;
             font-size: 1.2rem;
             overflow: hidden;
         }
-        #current-cases-container.expanded div p{
+        #current-cases-container.expanded>div>p{
             width: 100%;
             text-align: center;
             font-size: 1.2rem;
@@ -187,7 +198,7 @@
         #case-solves>section {
             position: relative;
             gap: 10px;
-            background-color: var(--background-10);
+            background-color: var(--primary15);
             padding: 15px;
             border-radius: var(--border-radius);
             width: auto;
@@ -214,27 +225,27 @@
             width: 100%;
             border-radius: var(--border-radius-small);
             overflow: hidden;
-            &.no-solves {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                p {
-                    width: 100%;
-                    text-align: center;
-                    height: 50px;
-                }
-            }
+        }
+        .no-solves {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        .no-solves p {
+            width: 100%;
+            text-align: center;
+            height: 50px;
         }
         #case-solvelist p {
             padding: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--background-20);
+            background-color: var(--primary10);
         }
         #case-solvelist p:nth-child(4n+1),  #case-solvelist p:nth-child(4n+2) {
-            background-color: var(--background-15);
+            background-color: var(--primary20);
         }
         #case-solvelist .grid-header {
             font-weight: bold;
@@ -248,9 +259,21 @@
         }
         @media (max-width: 800px) {
             aside {
-                bottom: 0;
+                bottom: 15px;
                 left: 50%;
-                transform: translate(-50%, 50%);
+                transform: translateX(-50%);
+            }
+            main {
+                align-items: start;
+                height: calc(100% - 15px);
+                min-height: auto;
+            }
+            main>section {
+                height: 1px;
+                min-height: 50vh;
+            }
+            #expand-button {
+                display: none;
             }
         }
     </style>
@@ -270,7 +293,7 @@
                 <p id="timer">0.00</p>
                 <span id="delete-last-solve-button" class="disabled"><i class="fa-sharp fa-solid fa-xmark"></i></span>
             </section>
-            <a href="oll_selection.html">Select cases</a>
+            <a id="select-cases-link" href="oll_selection.html">Select cases</a>
         </section>
         <div class="hidden" id="case-solves">
             <section>
