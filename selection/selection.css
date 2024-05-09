@@ -1,0 +1,88 @@
+body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+#groups {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.cases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    transition: all 0.2s;
+    padding: 15px;
+    margin: -15px;
+    overflow: clip;
+    max-height: 5000px;
+}
+.case {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary10);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    padding: 15px;
+    gap: 15px;
+    position: relative;
+    transition: 
+        color 0.5s,
+        transform 0.2s,
+        outline 0s,
+        box-shadow 0.2s;
+}
+.case.selected {
+    background-color: var(--accent15);
+    outline: 2px solid var(--secondary);
+    box-shadow: 0 0 15px 0 var(--secondary);
+}
+.case:active {
+    transform: scale(0.95);
+}
+.case p {
+    color: #999;
+    line-height: 1.5;
+}
+img {
+    width: 70px;
+}
+.case > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+button {
+    position: sticky;
+    bottom: 40px;
+    left: calc(100% - 20px);
+    margin: 20px;
+}
+.group-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+.group-header i {
+    font-size: 1.5rem;
+    padding: 7px;
+    color: var(--primary);
+    transform: translateY(-3px);
+}
+h2 {
+    cursor: pointer;
+    color: #999;
+    width: fit-content;
+    text-align: right;
+}
+h2:hover {
+    color: lightgray;
+}
+h2:active {
+    color: white;
+    transform: scale(0.95);
+}

@@ -1,12 +1,28 @@
 let container = document.getElementById('groups');
-import cases from '../scripts/oll_cases.json' assert { type: 'json' };
-import groups from "../scripts/oll_groups.json" assert { type: "json" };
-let selectedCases = JSON.parse(localStorage.getItem('selectedCases')) || [];
+import cases from '../scripts/data/oll_cases.json' assert { type: 'json' };
+import groups from "../scripts/data/oll_groups.json" assert { type: "json" };
+let selectedCases = JSON.parse(localStorage.getItem('selectedCases')) || {"oll": [], "pll": []};
 //localStorage.clear();
+localStorage.setItem("algset", "oll")
 if (container != null) {
     for (let group in groups) {
         let groupContainer = document.createElement("section");
-        groupContainer.innerHTML = "<h2>" + group + "</h2>";
+        groupContainer.innerHTML = "<section class='group-header'><h2>" + group + "</h2><i class='fa-solid fa-caret-down'></i></section>";
+        let unfurlButton = groupContainer.getElementsByClassName("fa-solid")[0];
+        unfurlButton.addEventListener("click", function() {
+            let groupCasesContainer = this.parentElement.nextElementSibling;
+            if (groupCasesContainer.style.maxHeight == "0px") {
+                groupCasesContainer.style.maxHeight = groupCasesContainer.scrollHeight +30+ "px"
+                groupCasesContainer.style.margin = "-15px -15px";
+                groupCasesContainer.style.padding = "15px 15px";
+                this.style.transform = "translateY(-3px) rotate(0deg)";
+            } else {
+                groupCasesContainer.style.padding = "0 15px";
+                groupCasesContainer.style.margin = "0 -15px";
+                groupCasesContainer.style.maxHeight = 0;
+                this.style.transform = "translateY(-3px) rotate(-90deg)";
+            }
+        }); 
         let groupCasesContainer = document.createElement('div');
         groupCasesContainer.classList.add("cases")
         // click h2 to select all cases in group
@@ -14,12 +30,12 @@ if (container != null) {
             let cases = Array.from(groupCasesContainer.querySelectorAll('.case'));
             if (cases.every(element => element.classList.contains('selected'))) {
                 cases.forEach(element => element.classList.remove('selected'));
-                selectedCases = selectedCases.filter(element => !groups[group].includes(element));
+                selectedCases["oll"] = selectedCases["oll"].filter(element => !groups[group].includes(element));
             } else {
                 cases.forEach(element => {
                     if (!element.classList.contains('selected')) {
                         element.classList.add('selected');
-                        selectedCases.push(groups[group][cases.indexOf(element)]);
+                        selectedCases["oll"].push(groups[group][cases.indexOf(element)]);
                     }
                 }
                 );
@@ -31,12 +47,12 @@ if (container != null) {
                 (function (caseIndex) {
                     let caseContainer = document.createElement('div');
                     caseContainer.classList.add('case');
-                    if (selectedCases.includes(caseIndex)) {
+                    if (selectedCases["oll"].includes(caseIndex)) {
                         caseContainer.classList.add('selected');
                     }
                     caseContainer.innerHTML = "<h3>" + cases[caseIndex]["name"] + "</h3>";
                     let caseInfo = caseContainer.appendChild(document.createElement('div'));
-                    caseInfo.innerHTML += "<img src='oll_img/"+i+".svg' alt=\"nefunguje\">";
+                    caseInfo.innerHTML += "<img src='../../oll_img/"+i+".svg' alt=\"nefunguje\">";
                     caseInfo.innerHTML += "<p>" + cases[caseIndex]["a"] + "</p>";
                     groupCasesContainer.appendChild(caseContainer);
 
@@ -48,7 +64,7 @@ if (container != null) {
 
                         } else {
                             this.classList.add('selected');
-                            selectedCases.push(caseIndex);
+                            selectedCases["oll"].push(caseIndex);
                             localStorage.setItem('selectedCases', JSON.stringify(selectedCases));
                         }
                     });
@@ -61,7 +77,7 @@ if (container != null) {
     }
 }
 document.getElementById("done-button").addEventListener("click", function() {
-    window.location.href = "timer.html";
+    window.location.href = "/timer/";
 });
 function fixCaseColumns(groupCasesContainer, group) {
     while (groupCasesContainer.lastChild && !groupCasesContainer.lastChild.hasChildNodes()) {

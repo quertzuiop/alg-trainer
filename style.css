@@ -14,6 +14,66 @@
     --secondarycontrast: #64d97b;
     --accentcontrast: #ffdd00;
 
+    --text-50: #f1ecf9;
+    --text-100: #e3d9f2;
+    --text-200: #c6b3e6;
+    --text-300: #aa8cd9;
+    --text-400: #8d66cc;
+    --text-500: #7140bf;
+    --text-600: #5a3399;
+    --text-700: #442673;
+    --text-800: #2d194d;
+    --text-900: #170d26;
+    --text-950: #0b0613;
+
+    --background-50: #f0eafa;
+    --background-100: #e1d6f5;
+    --background-200: #c4adeb;
+    --background-300: #a684e1;
+    --background-400: #885bd7;
+    --background-500: #6b32cd;
+    --background-600: #5528a4;
+    --background-700: #401e7b;
+    --background-800: #2b1452;
+    --background-900: #150a29;
+    --background-950: #0b0515;
+
+    --primary-50: #efe9fc;
+    --primary-100: #dfd3f8;
+    --primary-200: #c0a7f1;
+    --primary-300: #a07bea;
+    --primary-400: #804fe3;
+    --primary-500: #6022dd;
+    --primary-600: #4d1cb0;
+    --primary-700: #3a1584;
+    --primary-800: #270e58;
+    --primary-900: #13072c;
+    --primary-950: #0a0316;
+
+    --secondary-50: #efe8fd;
+    --secondary-100: #dfd0fb;
+    --secondary-200: #bfa1f7;
+    --secondary-300: #9f72f3;
+    --secondary-400: #7f43ef;
+    --secondary-500: #5f14eb;
+    --secondary-600: #4c10bc;
+    --secondary-700: #390c8d;
+    --secondary-800: #26085e;
+    --secondary-900: #13042f;
+    --secondary-950: #0a0217;
+
+    --accent-50: #eee6fe;
+    --accent-100: #ddcdfe;
+    --accent-200: #bc9cfc;
+    --accent-300: #9a6afb;
+    --accent-400: #7938fa;
+    --accent-500: #5706f9;
+    --accent-600: #4605c7;
+    --accent-700: #340495;
+    --accent-800: #230363;
+    --accent-900: #110132;
+    --accent-950: #090119;
+
     --text5: hsl(263, 50%, 93%, 5%);
     --text10: hsl(263, 50%, 93%, 10%);
     --text15: hsl(263, 50%, 93%, 15%);
@@ -114,7 +174,7 @@
 * {
     box-sizing: border-box;
     color: var(--text);
-    transition: transform 0.2s, color 0.5s, background-color 0.5s;
+    transition: all 0.2s;
     margin: 0;
 }
 body {
@@ -164,7 +224,8 @@ button {
     border: none;
 }
 button:hover {
-    background-color: var(--primary80);
+    /*background-color: var(--primary-400);*/
+    transform: translateY(-2px);
     cursor: pointer;
 }
 button:active {

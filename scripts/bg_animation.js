@@ -5,6 +5,7 @@ const ctx = canvas.getContext('2d');
 var casesWidth = aside.offsetWidth;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+let timerPos = document.getElementById("timer").getBoundingClientRect();
 const particles = [];
 
 function createParticle(x, y) {
@@ -45,15 +46,15 @@ function updateParticles() {
     particles.forEach((particle) => {
         particle.x += Math.cos(particle.heading) * particle.speed;
         particle.y += Math.sin(particle.heading) * particle.speed;
-        const a = Math.atan2(window.innerHeight/2 - particle.y, window.innerWidth/2 /*+ aside.offsetWidth*/ - particle.x) - particle.heading;
+        const a = Math.atan2(timerPos.left+timerPos.width/2 - particle.y, timerPos.top+timerPos.height/2 - particle.x) - particle.heading;
         const angle = mod(a + Math.PI, Math.PI*2) - Math.PI;
         //const angle = Math.atan2(window.innerHeight / 2 - particle.y, window.innerWidth / 2 - particle.x) - particle.heading;
         //console.log(mod(-10, 360), angle * 57.2958, particle.heading * 57.2958);
-        particle.heading += angle * 0.0001 * Math.sqrt(Math.pow(window.innerWidth / 2 - particle.x /*+ aside.offsetWidth*/, 2) + Math.pow(window.innerHeight / 2 - particle.y, 2));
+        particle.heading += angle * 0.01 * Math.sqrt(Math.pow(timerPos.left+timerPos.width/2 - particle.x, 2) + Math.pow(timerPos.top+timerPos.height/2- particle.y, 2));
         particle.heading += Math.random() * 0.2 - 0.1;
         if (particle.x > canvas.width || particle.x < 0 || particle.y > canvas.height || particle.y < 0) {
-            particle.x = canvas.width / 2;
-            particle.y = canvas.height / 2;
+            particle.x = timerPos.left+timerPos.width/2;
+            particle.y = timerPos.top+timerPos.height/2;
         }
     });
 }
@@ -95,10 +96,14 @@ window.addEventListener('resize', () => {
     pheight = canvas.height;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    targetPos = document.getElementById("timer").getBoundingClientRect();
+    console.log(targetPos);
+    console.log(targetPos);
     particles.forEach((particle) => {
-        particle.x += (canvas.width - pwidth) / 2;
-        particle.y += (canvas.height - pheight) / 2;
+        particle.x += (timerPos.left+timerPos.width/2) + (targetPos.left+targetPos.width/2)
+        particle.y += (timerPos.top+timerPos.height/2) + (targetPos.top+targetPos.height/2)
     });
+    timerPos = targetPos;
 });
 for (let i = 0; i < 30; i++) {
     //particles.push(createParticle(Math.random() * canvas.width, Math.random() * canvas.height));

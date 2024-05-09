@@ -1,7 +1,7 @@
 let timer = document.getElementById("timer");
 let scramble = document.getElementById("scramble");
 
-let algset = JSON.parse(localStorage.getItem("algset")) || "pll";
+let algset = localStorage.getItem("algset") || "oll";
 let solveLists = JSON.parse(localStorage.getItem("solveLists")) ||{"oll": [], "pll": []};
 
 let time = 0;
@@ -9,8 +9,8 @@ let running = 0;
 let startTime;
 let selectedCase;
 let justStopped = false;
-import oll_cases from "../scripts/oll_cases.json" assert { type: "json" };
-import pll_cases from "../scripts/pll_cases.json" assert { type: "json" };
+import oll_cases from "../scripts/data/oll_cases.json" assert { type: "json" };
+import pll_cases from "../scripts/data/pll_cases.json" assert { type: "json" };
 //localStorage.clear();
 const selectedCases = JSON.parse(localStorage.getItem("selectedCases")) || {"oll": [], "pll": []};
 
@@ -93,4 +93,4 @@ document.getElementById("delete-last-solve-button").addEventListener("click", fu
 let selCasesLink = document.getElementById("select-cases-link")
 console.log(selCasesLink)
 selCasesLink.innerHTML = "Select " + algset + " cases";
-selCasesLink.href = algset + "_selection.html";
+selCasesLink.href = "/selection/"+algset + "/";

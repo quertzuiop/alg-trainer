@@ -1,9 +1,9 @@
 let container = document.getElementById("current-cases-container");
 let timer = document.getElementById("timer")
 let selectedCases = JSON.parse(localStorage.getItem("selectedCases")) || {"oll": [], "pll": []};
-import cases from './oll_cases.json' assert { type: "json" };
+import cases from './data/oll_cases.json' assert { type: "json" };
 /*import Chart from 'chart.js/auto';*/
-let algset = JSON.parse(localStorage.getItem("algset")) || "pll";
+let algset = localStorage.getItem("algset") || "pll";
 let solveList = JSON.parse(localStorage.getItem("solveLists")) ||{"oll": [], "pll": []};
 solveList = solveList[algset];
 
@@ -19,7 +19,7 @@ function updateCases() {
         for (let i = 0; i < selectedCases[algset].length; i++) {
             (function (caseIndex) {
                 let caseContainer = document.createElement("div");
-                caseContainer.innerHTML += "<img src='"+algset+"_img/"+selectedCases[algset][caseIndex]+".svg' alt="+selectedCases[algset][caseIndex]+">";
+                caseContainer.innerHTML += "<img src='../"+algset+"_img/"+selectedCases[algset][caseIndex]+".svg' alt="+selectedCases[algset][caseIndex]+">";
 
                 let avg = average(selectedCases[algset][caseIndex], true);
                 caseContainer.innerHTML += "<p>"+(avg!=0 ? avg : "-")+"</p>";
