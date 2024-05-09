@@ -3,5 +3,8 @@
     "chart.js": "^4.4.2",
     "three": "^0.163.0",
     "three.js": "^0.77.0"
+  },
+  "scripts": {
+    "deploy": "touch ./output_folder/.nojekyll && gh-pages -d output_folder -t true"
   }
 }
