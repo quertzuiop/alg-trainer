@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/reset.css">
-    <link rel="stylesheet" href="/style.css">
+    <base href="/alg-trainer/"><!--weird gh pages bug, so this is necessary-->
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="timer/style.css">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,20 +32,20 @@
             <i class="fa-solid fa-chevron-right expanded" id="expand-button"></i>
         </aside>
         <section>
-            <a id="back-link" href="../"><i class="fa-solid fa-arrow-left"></i>Back to landing page</a>
+            <a id="back-link" href=""><i class="fa-solid fa-arrow-left"></i>Back to landing page</a>
             <section>
                 <p id="scramble">Loading scramble...</p>
                 <p id="timer">0.00</p>
                 <span id="delete-last-solve-button" class="disabled"><i class="fa-sharp fa-solid fa-xmark"></i></span>
             </section>
-            <a id="select-cases-link" href="../selection/oll/index.html">Select cases</a>
+            <a id="select-cases-link" href="selection/oll/index.html">Select cases</a>
         </section>
         <div class="hidden" id="case-solves">
             <section>
                 <span id="close-case-solves-button"><i class="fa-sharp fa-solid fa-xmark"></i></span>
                 <h2>Anti-Sune</h2>
                 <div>
-                    <img id="case-img" src="/oll_img/1.svg">
+                    <img id="case-img" src="oll_img/1.svg">
                     <p id="">0.00</p>
                 </div>
                 <section id="case-solvelist">
@@ -54,8 +55,8 @@
             </section>
         </div>
     </main>
-    <script type="module" src="/scripts/timer.js"></script>
-    <script type="module" src="/scripts/current-cases.js"></script>
-    <script src="/scripts/bg_animation.js"></script>
+    <script type="module" src="scripts/timer.js"></script>
+    <script type="module" src="scripts/current-cases.js"></script>
+    <script src="scripts/bg_animation.js"></script>
 </body>
 </html>

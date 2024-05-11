@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/reset.css">
-    <link rel="stylesheet" href="/style.css">
+    <base href="/alg-trainer/"><!--weird gh pages bug, so this is necessary-->
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
     <title>Alg trainer</title>
     <style>
         body {
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 50px;
         }
-
+        body>section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
         #title {
             font-size: 4rem;
             font-weight: 700;
@@ -20,7 +27,7 @@
             max-width: 700px;
             text-align: center;
         }
-        .algset-selection {
+        .algset-selection{
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -44,16 +51,88 @@
             padding: 10px;
         }
         .algset img {
-            width: 150px;
+            width: 120px;
             cursor: pointer;
+        }
+        .algset img:hover {
+            transform: scale(1.05);
         }
         .algset h3 {
             font-size: 1.5rem;
             font-weight: 700;
         }
         canvas {
+            display: none;
             width: 500px;
             height: 500px;
+        }
+        /*https://css-irl.info/animating-underlines/*/
+        #help-button {
+            font-size: 1.5rem;
+            color: var(--link);
+            cursor: pointer;
+            position: relative;
+        }
+        #help-button::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0.1em;
+            background-color: var(--link);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 1;
+            transform: scale(0);
+            transform-origin: center;
+        }
+        #help-button:hover::after, #help-button:focus::after {
+            transform: scale(1);
+        }
+        #help.hidden {
+            /*max-width: 0;
+            max-height: 0;
+            gap: 0;
+            font-size: 10px;
+            padding: 0;
+            margin: 0;
+            opacity: 0;
+            */
+            z-index: -2;
+            transform: scale(1.1);
+            opacity: 0;
+        }
+        .hidden i {
+            display: none;
+        }
+        #help{
+            position: absolute;
+            left: 50%;
+            transform: scale(1) translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: var(--primary20);
+            border-radius: var(--border-radius);
+            line-height: 1.25;
+            backdrop-filter: blur(15px);
+            max-width: 1000px;
+            max-height: 1000px;
+            transition: all 3s;
+            overflow: hidden;
+        }
+        #close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
         }
     </style>
     <script type="importmap">
@@ -66,22 +145,37 @@
       </script>
 </head>
 <body>
-    <h1 id="title">The ultimate tool for algorithm training</h1>    
-    <section class="algset-selection">
-        <h2>Start Training!</h2>
-        <section>
-            <div class="algset">
-                <h3>OLL</h3>
-                <img id="oll" src="img/oll.svg" alt="">
-            </div>
-            <div class="algset">
-                <h3>PLL</h3>
-                <img id="pll" src="img/pll.svg" alt="">
-            </div>
+    <script src="https://kit.fontawesome.com/a40125ec5d.js" crossorigin="anonymous"></script>
+    <h1 id="title">The ultimate tool for algorithm training</h1>
+    <section>
+        <p id="help-button">How does it work?</p>
+        <section class="algset-selection">
+            <h2>Start Training!</h2>
+            <section>
+                <div class="algset">
+                    <h3>OLL</h3>
+                    <img id="oll" src="img/oll.svg" alt="">
+                </div>
+                <div class="algset">
+                    <h3>PLL</h3>
+                    <img id="pll" src="img/pll.svg" alt="">
+                </div>
+            </section>
         </section>
     </section>
-    <a href="/timer/"></a>
-    <script type="module" src="scripts/cubes.js"></script>
+    <section class="hidden" id="help">
+        <span id="close-button"><i class="fa-sharp fa-solid fa-xmark"></i></span>
+        <h2>Getting started</h2>
+        <p>Choose a set of algorithms you want to train. You can choose between OLL and PLL.</p>
+        <p>After you choose a set, you will be presented with a list of cases. You can then select the cases you want to train.</p>
+        <p>When you are ready, click the "Done" button. You will then be presented with a timer and a scramble. You can start the timer by pressing the spacebar.</p>
+        <p>After you finish a solve, you can see your times and the cases you have solved. You can also delete the last solve if you made a mistake.</p>
+        <p>If you want to </p>
+        <p>Good luck!</p>
+    </section>
+    <!--
+<script type="module" src="scripts/cubes.js"></script>
+    -->
     <script src="scripts/landing.js"></script>
 </body>
 </html>

@@ -93,4 +93,4 @@ document.getElementById("delete-last-solve-button").addEventListener("click", fu
 let selCasesLink = document.getElementById("select-cases-link")
 console.log(selCasesLink)
 selCasesLink.innerHTML = "Select " + algset + " cases";
-selCasesLink.href = "/selection/"+algset + "/";
+selCasesLink.href = "selection/"+algset + "/";

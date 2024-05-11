@@ -52,14 +52,14 @@ if (container != null) {
                     }
                     caseContainer.innerHTML = "<h3>" + cases[caseIndex]["name"] + "</h3>";
                     let caseInfo = caseContainer.appendChild(document.createElement('div'));
-                    caseInfo.innerHTML += "<img src='../../oll_img/"+i+".svg' alt=\"nefunguje\">";
+                    caseInfo.innerHTML += "<img src='oll_img/"+i+".svg' alt=\"nefunguje\">";
                     caseInfo.innerHTML += "<p>" + cases[caseIndex]["a"] + "</p>";
                     groupCasesContainer.appendChild(caseContainer);
 
                     caseContainer.addEventListener('click', function () {
                         if (this.classList.contains('selected')) {
                             this.classList.remove('selected');
-                            selectedCases.splice(selectedCases.indexOf(caseIndex), 1);
+                            selectedCases["oll"].splice(selectedCases["oll"].indexOf(caseIndex), 1);
                             localStorage.setItem('selectedCases', JSON.stringify(selectedCases));
 
                         } else {
@@ -77,7 +77,7 @@ if (container != null) {
     }
 }
 document.getElementById("done-button").addEventListener("click", function() {
-    window.location.href = "/timer/";
+    window.location.href = "timer/";
 });
 function fixCaseColumns(groupCasesContainer, group) {
     while (groupCasesContainer.lastChild && !groupCasesContainer.lastChild.hasChildNodes()) {

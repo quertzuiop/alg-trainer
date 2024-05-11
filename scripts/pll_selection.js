@@ -52,7 +52,7 @@ if (container != null) {
                     }
                     caseContainer.innerHTML = "<h3>" + Object.keys(cases)[i] + "</h3>";
                     let caseInfo = caseContainer.appendChild(document.createElement('div'));
-                    caseInfo.innerHTML += "<img src='../../pll_img/"+Object.keys(cases)[i]+".svg' alt=\"nefunguje\">";
+                    caseInfo.innerHTML += "<img src='pll_img/"+Object.keys(cases)[i]+".svg' alt=\"nefunguje\">";
                     caseInfo.innerHTML += "<p>" + cases[Object.keys(cases)[i]][0] + "</p>";
                     groupCasesContainer.appendChild(caseContainer);
 
@@ -77,7 +77,7 @@ if (container != null) {
     }
 }
 document.getElementById("done-button").addEventListener("click", function() {
-    window.location.href = "/timer/";
+    window.location.href = "timer/";
 });
 function fixCaseColumns(groupCasesContainer, group) {
     while (groupCasesContainer.lastChild && !groupCasesContainer.lastChild.hasChildNodes()) {

@@ -43,11 +43,12 @@ function rotateModel(move, cubeModel){
 	let [face, numRot] = moveMap[move];
 	let axis = Math.floor(face/2);
     let ax = ["x", "y", "z"][axis];
+    let paxes = ["y", "z", "x"].filter(pax => pax !== ax);
 	let depth = face % 2 == 0 ? 0 : 1;
 
     let targetAngle = Math.PI/2 * numRot;
     let axisName = ["x", "y", "z"][axis];
-    let angle = 0;
+    let angle = numRot * Math.PI/2;
     let speed = 0.05;
 
     function rotate() {
@@ -69,19 +70,27 @@ function rotateModel(move, cubeModel){
         }
        
         scene.add(cubieGroup);
+        let offset1 = Math.sin(angle-Math.PI/4);
+        let offset2 = Math.cos(angle-Math.PI/4);
         //  cubieGroup.position.add(center);
-        cubieGroup.rotateOnWorldAxis(new THREE.Vector3(ax=="x"?1:0, ax=="y"?1:0, ax=="z"?1:0), Math.PI/2); 
-        //cubieGroup.rotation[ax] += angle;
-        //cubieGroup.position.sub(center);
-        cubeModel.add(cubieGroup);
-        //add sphere at group center
-        let geometry = new THREE.SphereGeometry(1, 32, 32);
-        let material = new THREE.MeshBasicMaterial({color: 0xfff000});
-        let sphere = new THREE.Mesh(geometry, material);
-        sphere.position.set(cubieGroup.position.x, cubieGroup.position.y, cubieGroup.position.z);
-        scene.add(sphere);
-        renderer.render(scene, camera);
-        console.log(cubieGroup.children.length);
+        //cubieGroup.position.set(center.x, center.y, center.z);
+        for (let a = 0; a < 40; a++) {
+            setTimeout(() => {
+                cubieGroup.rotateOnWorldAxis(new THREE.Vector3(ax=="x"?1:0, ax=="y"?1:0, ax=="z"?1:0), targetAngle/40); 
+                cubieGroup.position.set(0, offset1, offset2);
+                //cubieGroup.position.set(0, 0, 0);
+                
+                for (let i = 0; i < cubieGroup.children.length; i++) {
+                    cubeModel.add(cubieGroup.children[0]);
+                    //update
+                    
+                }
+                //add sphere at group center
+                
+                scene.add(cubeModel);
+                renderer.render(scene, camera);
+            }, a*100);
+        }
     }
     rotate();
 }
