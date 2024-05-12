@@ -43,7 +43,7 @@ function update() {
     setTimeout(update, 10);
 }
 function newScramble() {
-    selectedCase = choose(selectedCases[algset].slice(1));
+    selectedCase = choose(selectedCases[algset]);
     if (algset == "oll") {
         scramble.innerHTML = oll_cases[selectedCase]["scrambles"][Math.floor(Math.random() * oll_cases[selectedCase]["scrambles"].length)];
     } else if (algset == "pll") {
