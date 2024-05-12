@@ -1,10 +1,10 @@
 const canvas = document.getElementById('animated-background');
-const main = document.getElementsByTagName("main")[0];
+let main = document.getElementsByTagName("main")[0];
 const aside = document.getElementsByTagName("aside")[0];
 const ctx = canvas.getContext('2d');
 var casesWidth = aside.offsetWidth;
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.height = main.scrollHeight;
 
 
 const particles = [];
@@ -40,7 +40,7 @@ function drawParticles() {
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 const mod = (a, n) => a - Math.floor(a/n) * n
 function updateParticles() {
-    if (casesWidth != aside.offsetWidth) {
+    if (casesWidth != aside.offsetWidth && window.innerWidth < 1000) {
         particles.forEach((particle) => {
             particle.x += (aside.offsetWidth - casesWidth) / 2;
         });
@@ -62,15 +62,20 @@ function updateParticles() {
     });
 }
 function animate() {
-    createParticle(window.innerWidth / 2, window.innerHeight / 2);
+    /*createParticle(window.innerWidth / 2, window.innerHeight / 2);*/
     drawParticles();
     updateParticles();
-    setTimeout(animate, 100);
+    setTimeout(animate, 50);
 }
 
 function updatePos() {
+    let blur = document.querySelector("main", "::before"); 
+    console.log(blur);
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    main = document.getElementsByTagName("main")[0];
+    console.log(main.scrollHeight);
+    canvas.height = main.scrollHeight;
+    /*blur.style.height = document.documentElement.scrollHeight + "px";*/   
     [prevX, prevY] = [timerX, timerY];
     targetPos = document.getElementById("timer").getBoundingClientRect();
     timerX = targetPos.left+targetPos.width/2;

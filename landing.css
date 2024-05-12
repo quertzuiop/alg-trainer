@@ -1,0 +1,184 @@
+body {
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 20px;
+}
+.no-scroll {
+    height: 100vh;
+    overflow: hidden;
+}
+body>section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+#title {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--text);
+    text-align: center;
+    text-wrap: balance;
+    max-width: 900px;
+}
+.algset-selection{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary15);
+    border-radius: var(--border-radius);
+}
+.algset-selection>section {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.algset {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+}
+.algset img {
+    width: 120px;
+    cursor: pointer;
+}
+.algset img:hover {
+    transform: scale(1.05);
+}
+.algset h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+canvas {
+    display: none;
+    width: 500px;
+    height: 500px;
+}
+/*https://css-irl.info/animating-underlines/*/
+#help-button {
+    font-size: 1.5rem;
+    color: var(--link);
+    cursor: pointer;
+    position: relative;
+}
+#help-button::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.1em;
+    background-color: var(--link);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    opacity: 1;
+    transform: scale(0);
+    transform-origin: center;
+}
+#help-button:hover::after, #help-button:focus::after {
+    transform: scale(1);
+}
+#help-blur {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.1s;
+}
+#help-blur.hidden {
+    transform: translate(-50%, -50%) scale(0);
+}
+#help-blur::before {
+    content: "\00a0";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(30px);
+}/*
+#help-blur.hidden::before {
+    transform: scale(0);
+    overflow: hidden;
+}*/
+.hidden i {
+    display: none;
+}
+#help{
+    position: absolute;
+    left: 50vw;
+    top: 50vh;
+    transform-origin: left;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    background-color: var(--primary15);
+    border-radius: var(--border-radius);
+    line-height: 1.35;
+    backdrop-filter: blur(30px) hue-rotate(0deg);
+    width: 500px;
+    max-height: 80vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    
+}
+#help ::-webkit-scrollbar {
+    display: none;
+}
+#help h2 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+#close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: var(--text);
+    cursor: pointer;
+}
+@media (max-width: 800px) {
+    #title {
+        font-size: 3rem;
+    }
+    .algset img {
+        width: 100px;
+    }
+    .algset h3 {
+        font-size: 1.25rem;
+    }
+    #help h2 {
+        font-size: 1.5rem;
+    }
+}
+@media (max-width: 700px) {
+    #help {
+        width: 80vw;
+    }
+}/*
+@media (max-height: 600px) {
+    #help {
+        top: 50vh;
+        transform: scale(1) translate(-50%, -50%);
+    }
+}*/

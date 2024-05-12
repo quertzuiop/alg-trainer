@@ -5,7 +5,7 @@ body {
 canvas {
     display: block;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background-color: transparent;
     position: absolute;
     top: 0;
@@ -106,6 +106,10 @@ a {
     align-items: center;
     width: 100%;
 }
+#current-cases-container>div:hover {
+    cursor: pointer;
+    scale: 1.05;
+}
 #current-cases-container>div>p{
     text-align: center;
     font-size: 1.2rem;
@@ -135,7 +139,7 @@ a {
     margin-top: 10px;
     cursor: pointer;
 }
-#delete-last-solve-button:hover {
+#delete-last-solve-button:hover i {
     color: #ff7f7f;
 }
 #delete-last-solve-button.disabled {
@@ -147,6 +151,9 @@ a {
 #expand-button.expanded {
     transform: scale(-1, 1);
 }
+#expand-button:hover {
+    cursor: pointer;
+}
 img {
     width: 80px;
 }
@@ -154,7 +161,7 @@ img {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(1);
     display: flex;
     height: 100%;
     width: 100%;
@@ -163,6 +170,7 @@ img {
     align-items: center;
     justify-content: center;
     z-index: 2;
+    transition: all 0.1s;
 }
 #case-solves::before {
     content: "\00a0";
@@ -191,7 +199,8 @@ img {
     height: min-content;
 }
 #case-solves.hidden {
-  display: none;
+    transform: translate(-50%, -50%) scale(0);
+    pointer-events: none;
 }
 #case-solves>section>div {
     display: flex;
@@ -260,15 +269,19 @@ section #case-solvelist {
         align-items: center;
         height: calc(100% - 15px);
         flex-direction: column-reverse;
-        overflow: scroll;
+        overflow-y: scroll;
+        overflow-x: hidden;
         position: static;
     }
     main>section {
         height: 1px;
-        min-height: 50vh;
+        min-height: 300px;
         margin-bottom: 15px;
     }
     #expand-button {
         display: none;
+    }
+    #current-cases-container {
+        max-height: 10000px;
     }
 }
